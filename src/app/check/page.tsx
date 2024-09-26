@@ -9,6 +9,7 @@ import { type Save } from "@/src/types/save";
 export default function Index(): JSX.Element {
     const [order, setOrder] = useState<Order>();
     const [total, setTotal] = useState(0);
+    const [name, setName] = useState("");
 
     useEffect(() => {
         const save = localStorage.getItem("save");
@@ -16,8 +17,59 @@ export default function Index(): JSX.Element {
             const parsed: Save = JSON.parse(save);
             setOrder(parsed.order);
             setTotal(parsed.total);
+            setName(parsed.name);
         }
     }, [setOrder]);
+
+    function handleDecide() {
+        const randomId = Math.floor(Math.random() * 1000);
+
+        const save = localStorage.getItem("save");
+        if (save !== null) {
+            const parsed: Save = JSON.parse(save);
+            parsed.orderNumber = `${randomId}`;
+            parsed.isOrdered = true;
+            localStorage.setItem("save", JSON.stringify(parsed));
+        }
+
+        //ここからグーグルフォーム送信用のコード
+        const formUrl = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfytJFibmQmGDOemB-Ixf_Lgt3tdZFiyuJcM_aSh0EG13neNA/formResponse";
+
+        // フォームの入力データ
+        const formData = new FormData();
+
+        formData.append("entry.1394773858", `${order?.frankfurt.ketchupCount}`);
+        formData.append("entry.1095591843", `${order?.frankfurt.mustardCount}`);
+        formData.append("entry.1551224039", `${order?.frankfurt.ketchupMustardCount}`);
+        formData.append("entry.1407949314", `${order?.frankfurt.saltAndPepperCount}`);
+        formData.append("entry.2135323617", `${order?.frankfurt.normalCount}`);
+        formData.append("entry.291030975", `${order?.cheeseFrankfurt.ketchupCount}`);
+        formData.append("entry.365957516", `${order?.cheeseFrankfurt.mustardCount}`);
+        formData.append("entry.1034907842", `${order?.cheeseFrankfurt.ketchupMustardCount}`);
+        formData.append("entry.193227970", `${order?.cheeseFrankfurt.saltAndPepperCount}`);
+        formData.append("entry.1093284244", `${order?.cheeseFrankfurt.normalCount}`);
+        formData.append("entry.36397433", name);
+        formData.append("entry.1117982710", `${randomId}`);
+        // fetchを使ってデータを送信
+
+        const orderbutton = document.querySelector("#decide");
+        orderbutton?.setAttribute("disabled", "true");
+        fetch(formUrl, {
+            method: "POST",
+            mode: "no-cors", // クロスオリジンエラーを防ぐ
+            body: formData,
+        })
+            .then((response) => {
+                console.log(response);
+                document.location.href = "/number";
+            })
+            .catch((error) => {
+                alert("エラーが発生しました。もう一度お試しください。" + error);
+            });
+
+        // })
+        // ここまでグーグルフォーム送信用のコード
+    }
 
     return (
         <div
@@ -82,9 +134,9 @@ export default function Index(): JSX.Element {
                 <Link href="/name">
                     <img alt="もどる" src="/return.png" />
                 </Link>
-                <Link href="/number">
+                <button aria-label="Next" id="decide" onClick={handleDecide} type="button">
                     <img alt="注文確定" src="/decide.png" />
-                </Link>
+                </button>
             </div>
         </div>
     );
