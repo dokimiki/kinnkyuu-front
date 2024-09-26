@@ -36,31 +36,23 @@ export default function Index(): JSX.Element {
     });
 
     function handleNext(): void {
-        let sumPrice = 0;
-        let normalNumber = 0;
+        let price = 0;
 
-        if (frankfurtTotal < cheeseFrankfurtTotal) {
-            normalNumber = frankfurtTotal - cheeseFrankfurtTotal;
-            sumPrice = frankfurtTotal * 300 + normalNumber * 200;
-        } else if (frankfurtTotal === cheeseFrankfurtTotal) {
-            sumPrice = frankfurtTotal * 300;
-        } else {
-            normalNumber = cheeseFrankfurtTotal - frankfurtTotal;
-            sumPrice = cheeseFrankfurtTotal * 300 + normalNumber * 200;
-        }
+        price += Math.min(frankfurtTotal, cheeseFrankfurtTotal) * 300;
+        price += Math.abs(frankfurtTotal - cheeseFrankfurtTotal) * 200;
 
         const save = localStorage.getItem("save");
         if (save !== null) {
             const parsed: Save = JSON.parse(save);
             parsed.order = values;
-            parsed.total = sumPrice;
+            parsed.total = price;
             localStorage.setItem("save", JSON.stringify(parsed));
         } else {
             const parsed: Save = {
                 name: "",
                 order: values,
                 orderNumber: "",
-                total: sumPrice,
+                total: price,
                 isOrdered: false,
             };
             localStorage.setItem("save", JSON.stringify(parsed));
