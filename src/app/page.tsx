@@ -7,7 +7,22 @@ import Count from "@/src/components/count";
 import { type Order } from "@/src/types/order";
 
 export default function Index(): JSX.Element {
-    const [values, setValues] = useState<Order>();
+    const [values, setValues] = useState<Order>({
+        frankfurt: {
+            ketchupCount: 0,
+            mustardCount: 0,
+            ketchupMustardCount: 0,
+            saltAndPepperCount: 0,
+            normalCount: 0,
+        },
+        cheeseFrankfurt: {
+            ketchupCount: 0,
+            mustardCount: 0,
+            ketchupMustardCount: 0,
+            saltAndPepperCount: 0,
+            normalCount: 0,
+        },
+    });
 
     const incrementCount = (sausage: string, taste: string): void => {
         const newValues = structuredClone(values);
