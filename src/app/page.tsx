@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Container, Dialog, Flex, Text } from "@radix-ui/themes";
+import { Box, Button, Container, Dialog, Flex, Text } from "@radix-ui/themes";
 import "./page.scss";
 import { useEffect, useState } from "react";
 import Count from "@/src/components/count";
@@ -158,6 +158,13 @@ export default function Index(): JSX.Element {
                                     />
                                 </Flex>
                             </Flex>
+                            <Dialog.Close>
+                                <Flex justify="end">
+                                    <Button color="gray" mt="1rem" variant="soft">
+                                        Close
+                                    </Button>
+                                </Flex>
+                            </Dialog.Close>
                         </Dialog.Content>
                     </Dialog.Root>
                     <Flex align="center" className="number-card" justify="center" pl="5px" pr="5px">
@@ -240,6 +247,13 @@ export default function Index(): JSX.Element {
                                     />
                                 </Flex>
                             </Flex>
+                            <Dialog.Close>
+                                <Flex justify="end">
+                                    <Button color="gray" mt="1rem" variant="soft">
+                                        Close
+                                    </Button>
+                                </Flex>
+                            </Dialog.Close>
                         </Dialog.Content>
                     </Dialog.Root>
 
