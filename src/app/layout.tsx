@@ -25,7 +25,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
             <Suspense>
                 <body>
                     <Reset>
-                        <Theme appearance="light">{children}</Theme>
+                        <Theme appearance="light">
+                            <header>
+                                <img
+                                    alt="橋口真一のフランクフルト"
+                                    src="/header.png"
+                                    style={{
+                                        width: "100%",
+                                        height: "auto",
+                                        objectFit: "cover",
+                                    }}
+                                />
+                            </header>
+                            {children}
+                        </Theme>
                     </Reset>
                 </body>
             </Suspense>
