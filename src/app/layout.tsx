@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
             <Suspense>
                 <body>
                     <Reset>
-                        <Theme appearance="light">
+                        <Theme appearance="light" className="all">
                             <header>
                                 <img
                                     alt="橋口真一のフランクフルト"
