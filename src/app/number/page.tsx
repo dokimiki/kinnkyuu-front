@@ -1,6 +1,22 @@
+"use client";
+
 import { Text } from "@radix-ui/themes";
+import { useState, useEffect } from "react";
+import { type Save } from "@/src/types/save";
 
 export default function Index(): JSX.Element {
+    const [total, setTotal] = useState(0);
+    const [orderNumber, setOrderNumber] = useState("");
+
+    useEffect(() => {
+        const save = localStorage.getItem("save");
+        if (save !== null) {
+            const parsed: Save = JSON.parse(save);
+            setTotal(parsed.total);
+            setOrderNumber(parsed.orderNumber);
+        }
+    }, [setTotal, setOrderNumber]);
+
     return (
         <div
             style={{
@@ -13,11 +29,11 @@ export default function Index(): JSX.Element {
         >
             <div style={{ background: "white", width: "100%", textAlign: "left", padding: "16px 0" }}>
                 <Text size="8" weight="bold">
-                    お支払い 100円
+                    お支払い {total}円
                 </Text>
             </div>
             <div style={{ background: "white", width: "100%", textAlign: "left", padding: "16px 0" }}>
-                <Text size="9">受け取り番号: 1番</Text>
+                <Text size="9">受け取り番号: {orderNumber}番</Text>
             </div>
             <Text size="5" weight="bold">
                 ※商品受け取り前に画面を閉じないでください。
