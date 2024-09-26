@@ -53,13 +53,14 @@ export default function Index(): JSX.Element {
         if (save !== null) {
             const parsed: Save = JSON.parse(save);
             parsed.order = values;
+            parsed.total = sumPrice;
             localStorage.setItem("save", JSON.stringify(parsed));
         } else {
             const parsed: Save = {
                 name: "",
                 order: values,
                 orderNumber: "",
-                total: -1,
+                total: sumPrice,
                 isOrdered: false,
             };
             localStorage.setItem("save", JSON.stringify(parsed));
