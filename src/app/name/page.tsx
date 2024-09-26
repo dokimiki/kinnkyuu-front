@@ -19,10 +19,6 @@ export default function Index(): JSX.Element {
         const save = localStorage.getItem("save");
         if (save !== null) {
             const parsed: Save = JSON.parse(save);
-            if (parsed.isOrdered) {
-                document.location.href = "/number";
-                return;
-            }
             parsed.name = name;
             localStorage.setItem("save", JSON.stringify(parsed));
         }
@@ -39,6 +35,12 @@ export default function Index(): JSX.Element {
         const save = localStorage.getItem("save");
         if (save !== null) {
             const parsed: Save = JSON.parse(save);
+
+            if (parsed.isOrdered) {
+                document.location.href = "/number";
+                return;
+            }
+            
             setName(parsed.name);
         }
     }, [setName]);

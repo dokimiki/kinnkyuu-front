@@ -73,10 +73,12 @@ export default function Index(): JSX.Element {
         const save = localStorage.getItem("save");
         if (save !== null) {
             const parsed: Save = JSON.parse(save);
+
             if (parsed.isOrdered) {
                 document.location.href = "/number";
                 return;
             }
+
             setValues(parsed.order);
         }
     }, [setValues]);
