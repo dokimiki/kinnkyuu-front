@@ -1,8 +1,26 @@
+"use client";
+
 import { Box, Container, Dialog, Flex, Text } from "@radix-ui/themes";
 import "./page.scss";
+import { useState } from "react";
 import Count from "@/src/components/count";
 
 export default function Index(): JSX.Element {
+    const [values, setValues] = useState({
+        ketchupCount: 0,
+        MustardCount: 0,
+        ketchupMustardCount: 0,
+        saltAdPepperCount: 0,
+        normalCount: 0,
+    });
+
+    const incrementCount = (): void => {
+        setValues((prevState) => ({
+            ...prevState,
+            ketchupCount: prevState.ketchupCount + 1,
+        }));
+    };
+
     return (
         <Box mt="2rem" width="100%">
             <Text ml="6vw" size="6" weight="bold">
@@ -20,7 +38,7 @@ export default function Index(): JSX.Element {
                                     <Text size="5" weight="bold">
                                         ケチャップ
                                     </Text>
-                                    <Count />
+                                    <Count incrementCount={incrementCount} sauceCount={values.ketchupCount} />
                                 </Flex>
                                 <Text size="5" weight="bold">
                                     マスタード
