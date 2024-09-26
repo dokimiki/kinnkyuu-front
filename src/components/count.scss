@@ -40,3 +40,11 @@
     border-radius: 20rem;
     background-color: var(--text-color-black);
 }
+
+.number-card {
+    height: 30px;
+    width: fit-content;
+    min-width: 40px;
+    border-radius: 8px;
+    border: 1px solid #d7d7d7;
+}
