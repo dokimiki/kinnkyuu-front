@@ -27,7 +27,7 @@ export default function count({
             />
 
             <Flex align="center" className="number-card" justify="center" pl="5px" pr="5px">
-                {order[sausage][taste]}
+                {(order as any)[sausage][taste]}
             </Flex>
 
             <Button
