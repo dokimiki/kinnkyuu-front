@@ -7,11 +7,13 @@ export default function count({
     taste,
     order,
     incrementCount,
+    decrementCount,
 }: {
     sausage: string;
     taste: string;
     order: Order | undefined;
     incrementCount: (sausage: string, taste: string) => void;
+    decrementCount: (sausage: string, taste: string) => void;
 }): JSX.Element {
     return (
         <Flex className="count-section" gap="2">
@@ -26,7 +28,14 @@ export default function count({
             <Flex align="center" className="number-card" justify="center" pl="5px" pr="5px">
                 {order[sausage][taste]}
             </Flex>
-            <Button className="minus" color="yellow" radius="full" />
+            <Button
+                className="minus"
+                color="yellow"
+                onClick={() => {
+                    decrementCount(sausage, taste);
+                }}
+                radius="full"
+            />
         </Flex>
     );
 }
