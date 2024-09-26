@@ -2,6 +2,12 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+:root {
+    --bg-color: #ffe8d5;
+
+    --text-color-black: #000000;
+}
+
 .radix-themes {
     --default-font-family: var(--font-inter);
 }
@@ -16,4 +22,8 @@
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
+}
+
+.all {
+    background-color: var(--bg-color);
 }
