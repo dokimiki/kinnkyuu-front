@@ -1,4 +1,5 @@
 import { Text } from "@radix-ui/themes";
+import Link from "next/link";
 
 export default function Index(): JSX.Element {
     return (
@@ -48,12 +49,12 @@ export default function Index(): JSX.Element {
                     padding: "1rem",
                 }}
             >
-                <button aria-label="Return" type="button">
-                    <img alt="" src="/return.png" />
-                </button>
-                <button aria-label="Next" type="button">
-                    <img alt="" src="/decide.png" />
-                </button>
+                <Link href="/name">
+                    <img alt="もどる" src="/return.png" />
+                </Link>
+                <Link href="/number">
+                    <img alt="注文確定" src="/decide.png" />
+                </Link>
             </div>
         </div>
     );

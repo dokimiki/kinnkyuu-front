@@ -1,8 +1,28 @@
 "use client";
 
 import { Text, TextField } from "@radix-ui/themes";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Index(): JSX.Element {
+    function handleNext(): void {
+        if (name.length < 4) {
+            alert("4文字以上で入力してください。");
+            return;
+        }
+        if (name.length > 10) {
+            alert("10文字以下で入力してください。");
+            return;
+        }
+
+        location.href = "/check";
+    }
+
+    const [name, setName] = useState("");
+    function handleChangeName(event: React.ChangeEvent<HTMLInputElement>): void {
+        setName(event.target.value);
+    }
+
     return (
         <div
             style={{
@@ -17,7 +37,7 @@ export default function Index(): JSX.Element {
                 お名前(ニックネーム可)
             </Text>
             <div>
-                <TextField.Root maxLength={10} placeholder="お名前" size="3" variant="surface">
+                <TextField.Root maxLength={10} onChange={handleChangeName} placeholder="お名前" size="3" value={name} variant="surface">
                     <TextField.Slot />
                 </TextField.Root>
                 <Text color="tomato">※4文字以上10文字以下で入力してください。</Text>
@@ -31,11 +51,11 @@ export default function Index(): JSX.Element {
                     padding: "1rem",
                 }}
             >
-                <button aria-label="Return" type="button">
-                    <img alt="" src="/return.png" />
-                </button>
-                <button aria-label="Next" type="button">
-                    <img alt="" src="/next.png" />
+                <Link href="/">
+                    <img alt="もどる" src="/return.png" />
+                </Link>
+                <button aria-label="Next" onClick={handleNext} type="button">
+                    <img alt="つぎへ" src="/next.png" />
                 </button>
             </div>
         </div>
