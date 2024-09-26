@@ -53,6 +53,37 @@ export default function Index(): JSX.Element {
         }
     }, [setValues]);
 
+    useEffect(() => {
+        const nextButton = document.querySelector("#next-button");
+        const nextButtonImg = document.querySelector("#next-button img");
+
+        if (
+            values.frankfurt.ketchupCount +
+                values.frankfurt.mustardCount +
+                values.frankfurt.ketchupMustardCount +
+                values.frankfurt.saltAndPepperCount +
+                values.frankfurt.normalCount +
+                values.cheeseFrankfurt.ketchupCount +
+                values.cheeseFrankfurt.mustardCount +
+                values.cheeseFrankfurt.ketchupMustardCount +
+                values.cheeseFrankfurt.saltAndPepperCount +
+                values.cheeseFrankfurt.normalCount ===
+            0
+        ) {
+            nextButton?.setAttribute("aria-disabled", "true");
+            nextButton?.setAttribute("disabled", "true");
+            nextButtonImg?.setAttribute("src", "/nextend.png");
+            nextButtonImg?.setAttribute("alt", "つぎへ");
+            nextButtonImg?.parentElement?.setAttribute("aria-disabled", "true");
+        } else {
+            nextButton?.setAttribute("aria-disabled", "false");
+            nextButton?.removeAttribute("disabled");
+            nextButtonImg?.setAttribute("src", "/next.png");
+            nextButtonImg?.setAttribute("alt", "つぎへ");
+            nextButtonImg?.parentElement?.setAttribute("aria-disabled", "false");
+        }
+    }, [values]);
+
     const incrementCount = (sausage: string, taste: string): void => {
         const newValues = structuredClone(values);
 
@@ -253,8 +284,8 @@ export default function Index(): JSX.Element {
                 </Flex>
             </Container>
 
-            <button aria-label="Next" onClick={handleNext} type="button">
-                <img alt="つぎへ" src="/next.png" />
+            <button aria-label="Next" disabled id="next-button" onClick={handleNext} type="button">
+                <img alt="つぎへ" src="/nextend.png" />
             </button>
         </Box>
     );
