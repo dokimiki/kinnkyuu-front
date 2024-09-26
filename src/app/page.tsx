@@ -1,7 +1,3 @@
 export default function Index(): JSX.Element {
-    return (
-        <div>
-            hello
-        </div>
-    );
+    return <div>hello!!</div>;
 }

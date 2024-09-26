@@ -1,0 +1,50 @@
+.count-section {
+    --plus-minus-width: 16px;
+    --plus-minus-height: 3px;
+}
+
+.plus {
+    width: 30px;
+    height: 30px;
+}
+
+.plus::before {
+    content: "";
+    position: absolute;
+    width: var(--plus-minus-width);
+    height: var(--plus-minus-height);
+    border-radius: 20rem;
+    background-color: var(--text-color-black);
+}
+
+.plus::after {
+    content: "";
+    position: absolute;
+    width: var(--plus-minus-width);
+    height: var(--plus-minus-height);
+    border-radius: 20rem;
+    transform: rotate(90deg);
+    background-color: var(--text-color-black);
+}
+
+.minus {
+    width: 30px;
+    height: 30px;
+}
+
+.minus::before {
+    content: "";
+    position: absolute;
+    width: var(--plus-minus-width);
+    height: var(--plus-minus-height);
+    border-radius: 20rem;
+    background-color: var(--text-color-black);
+}
+
+.number-card {
+    height: 30px;
+    width: fit-content;
+    min-width: 40px;
+    border-radius: 8px;
+    border: 1px solid #d7d7d7;
+}
