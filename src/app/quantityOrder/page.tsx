@@ -10,7 +10,7 @@ export default function Index(): JSX.Element {
         ketchupCount: 0,
         MustardCount: 0,
         ketchupMustardCount: 0,
-        saltAdPepperCount: 0,
+        saltAndPepperCount: 0,
         normalCount: 0,
     });
 
