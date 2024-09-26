@@ -1,5 +1,6 @@
-import { Box, Container, Flex, Text } from "@radix-ui/themes";
+import { Box, Container, Dialog, Flex, Text } from "@radix-ui/themes";
 import "./quantityOrder.scss";
+import Count from "@/src/components/count";
 
 export default function quantityOrder({ furanku, cheesefuranku }: { furanku: number; cheesefuranku: number }): JSX.Element {
     return (
@@ -9,7 +10,33 @@ export default function quantityOrder({ furanku, cheesefuranku }: { furanku: num
             </Text>
             <Container size="4">
                 <Flex align="center" gap="9" justify="center" m="2rem">
-                    <img alt="furannku" src="/furanku.png" />
+                    <Dialog.Root>
+                        <Dialog.Trigger>
+                            <img alt="furannku" src="/furanku.png" />
+                        </Dialog.Trigger>
+                        <Dialog.Content>
+                            <Flex direction="column" gap="4" width="100%">
+                                <Flex>
+                                    <Text size="5" weight="bold">
+                                        ケチャップ
+                                    </Text>
+                                    <Count />
+                                </Flex>
+                                <Text size="5" weight="bold">
+                                    マスタード
+                                </Text>
+                                <Text size="5" weight="bold">
+                                    ケチャマスタード
+                                </Text>
+                                <Text size="5" weight="bold">
+                                    塩コショウ
+                                </Text>
+                                <Text size="5" weight="bold">
+                                    トッピングなし
+                                </Text>
+                            </Flex>
+                        </Dialog.Content>
+                    </Dialog.Root>
                     <Text size="5" weight="bold">
                         {furanku}本
                     </Text>
