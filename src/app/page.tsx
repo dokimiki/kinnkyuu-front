@@ -284,7 +284,7 @@ export default function Index(): JSX.Element {
                 </Flex>
             </Container>
 
-            <button aria-label="Next" disabled id="next-button" onClick={handleNext} type="button">
+            <button aria-label="Next" id="next-button" onClick={handleNext} type="button">
                 <img alt="つぎへ" src="/nextend.png" />
             </button>
         </Box>
