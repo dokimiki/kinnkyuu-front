@@ -8,7 +8,7 @@ import Count from "@/src/components/count";
 export default function Index(): JSX.Element {
     const [values, setValues] = useState({
         ketchupCount: 0,
-        MustardCount: 0,
+        mustardCount: 0,
         ketchupMustardCount: 0,
         saltAndPepperCount: 0,
         normalCount: 0,
