@@ -1,7 +1,24 @@
+"use client";
+
 import { Text } from "@radix-ui/themes";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { type Order } from "@/src/types/order";
+import { type Save } from "@/src/types/save";
 
 export default function Index(): JSX.Element {
+    const [order, setOrder] = useState<Order>();
+    const [total, setTotal] = useState(0);
+
+    useEffect(() => {
+        const save = localStorage.getItem("save");
+        if (save !== null) {
+            const parsed: Save = JSON.parse(save);
+            setOrder(parsed.order);
+            setTotal(parsed.total);
+        }
+    }, [setOrder]);
+
     return (
         <div
             style={{
@@ -28,15 +45,28 @@ export default function Index(): JSX.Element {
                     flexDirection: "column",
                 }}
             >
-                <Text size="5">フランクフルト100本: 1000円</Text>
-                <Text size="5">フランクフルト100本: 1000円</Text>
-                <Text size="5">フランクフルト100本: 1000円</Text>
-                <Text size="5">フランクフルト100本: 1000円</Text>
+                {order !== undefined && (
+                    <>
+                        <Text size="8">フランクフルト</Text>
+                        <Text size="5">ケチャップ: {order.frankfurt.ketchupCount}本</Text>
+                        <Text size="5">マスタード: {order.frankfurt.mustardCount}本</Text>
+                        <Text size="5">ケチャマスタード: {order.frankfurt.ketchupMustardCount}本</Text>
+                        <Text size="5">塩コショウ: {order.frankfurt.saltAndPepperCount}本</Text>
+                        <Text size="5">トッピングなし: {order.frankfurt.normalCount}本</Text>
+
+                        <Text size="8">チーズフランクフルト</Text>
+                        <Text size="5">ケチャップ: {order.cheeseFrankfurt.ketchupCount}本</Text>
+                        <Text size="5">マスタード: {order.cheeseFrankfurt.mustardCount}本</Text>
+                        <Text size="5">ケチャマスタード: {order.cheeseFrankfurt.ketchupMustardCount}本</Text>
+                        <Text size="5">塩コショウ: {order.cheeseFrankfurt.saltAndPepperCount}本</Text>
+                        <Text size="5">トッピングなし: {order.cheeseFrankfurt.normalCount}本</Text>
+                    </>
+                )}
             </div>
 
             <div style={{ background: "white", width: "100%", textAlign: "left", padding: "16px 0" }}>
                 <Text size="8" weight="bold">
-                    合計 100円
+                    合計 {total}円
                 </Text>
             </div>
 
