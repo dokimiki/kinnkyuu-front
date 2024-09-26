@@ -18,21 +18,23 @@ export default function count({
     return (
         <Flex className="count-section" gap="2">
             <Button
-                className="plus"
-                color="yellow"
-                onClick={() => {
-                    incrementCount(sausage, taste);
-                }}
-                radius="full"
-            />
-            <Flex align="center" className="number-card" justify="center" pl="5px" pr="5px">
-                {order[sausage][taste]}
-            </Flex>
-            <Button
                 className="minus"
                 color="yellow"
                 onClick={() => {
                     decrementCount(sausage, taste);
+                }}
+                radius="full"
+            />
+
+            <Flex align="center" className="number-card" justify="center" pl="5px" pr="5px">
+                {order[sausage][taste]}
+            </Flex>
+
+            <Button
+                className="plus"
+                color="yellow"
+                onClick={() => {
+                    incrementCount(sausage, taste);
                 }}
                 radius="full"
             />
