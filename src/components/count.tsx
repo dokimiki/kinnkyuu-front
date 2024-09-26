@@ -1,12 +1,17 @@
 import { Button, Flex } from "@radix-ui/themes";
 import "./count.scss";
+import { type Order } from "@/src/types/order";
 
 export default function count({
-    sauceCount,
+    sausage,
+    taste,
+    order,
     incrementCount,
 }: {
-    sauceCount: number;
-    incrementCount: (value: number) => void;
+    sausage: string;
+    taste: string;
+    order: Order | undefined;
+    incrementCount: (sausage: string, taste: string) => void;
 }): JSX.Element {
     return (
         <Flex className="count-section" gap="2">
@@ -14,12 +19,12 @@ export default function count({
                 className="plus"
                 color="yellow"
                 onClick={() => {
-                    incrementCount(sauceCount);
+                    incrementCount(sausage, taste);
                 }}
                 radius="full"
             />
             <Flex align="center" className="number-card" justify="center" pl="5px" pr="5px">
-                {sauceCount}
+                {order[sausage][taste]}
             </Flex>
             <Button className="minus" color="yellow" radius="full" />
         </Flex>

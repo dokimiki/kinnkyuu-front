@@ -4,21 +4,18 @@ import { Box, Container, Dialog, Flex, Text } from "@radix-ui/themes";
 import "./page.scss";
 import { useState } from "react";
 import Count from "@/src/components/count";
+import { type Order } from "@/src/types/order";
 
 export default function Index(): JSX.Element {
-    const [values, setValues] = useState({
-        ketchupCount: 0,
-        mustardCount: 0,
-        ketchupMustardCount: 0,
-        saltAndPepperCount: 0,
-        normalCount: 0,
-    });
+    const [values, setValues] = useState<Order>();
 
-    const incrementCount = (): void => {
-        setValues((prevState) => ({
-            ...prevState,
-            ketchupCount: prevState.ketchupCount + 1,
-        }));
+    const incrementCount = (sausage: string, taste: string): void => {
+        const newValues = structuredClone(values);
+
+        if (newValues !== undefined) {
+            (newValues as any)[sausage][taste]++;
+            setValues(newValues);
+        }
     };
 
     return (
@@ -38,7 +35,7 @@ export default function Index(): JSX.Element {
                                     <Text size="5" weight="bold">
                                         ケチャップ
                                     </Text>
-                                    <Count incrementCount={incrementCount} sauceCount={values.ketchupCount} />
+                                    <Count incrementCount={incrementCount} order={values} sausage="frankfurt" taste="ketchupCount" />
                                 </Flex>
                                 <Text size="5" weight="bold">
                                     マスタード
