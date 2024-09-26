@@ -1,0 +1,44 @@
+name: Lint code 👮‍♀️
+on:
+    workflow_call:
+    workflow_dispatch: {}
+
+jobs:
+    lint:
+        name: Linting Code 🔍
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        # Grant status permission for MULTI_STATUS #
+        permissions:
+            contents: read
+            packages: read
+            statuses: write
+        steps:
+            # Checkout
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            # Get bun
+            - name: Install bun
+              uses: oven-sh/setup-bun@v2
+
+            # node_modules がキャッシュされていれば展開する
+            - name: Cache node modules
+              id: cache-npm
+              uses: actions/cache@v3
+              env:
+                  cache-name: cache-node-modules
+              with:
+                  path: node_modules
+                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+
+            # node_modules がキャッシュされてなければ bun i
+            - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+              name: install node_modules
+              run: bun install # --frozen-lockfileはdependabotで死ぬから廃止
+
+            - name: lint code
+              run: bun run eslint
