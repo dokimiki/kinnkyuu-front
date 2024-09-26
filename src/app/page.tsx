@@ -78,6 +78,10 @@ export default function Index(): JSX.Element {
                     </Text>
                 </Flex>
             </Container>
+
+            <button aria-label="Next" type="button">
+                <img alt="つぎへ" src="/next.png" />
+            </button>
         </Box>
     );
 }
