@@ -2,7 +2,8 @@
 
 import { Text, TextField } from "@radix-ui/themes";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { type Save } from "@/src/types/save";
 
 export default function Index(): JSX.Element {
     function handleNext(): void {
@@ -15,6 +16,13 @@ export default function Index(): JSX.Element {
             return;
         }
 
+        const save = localStorage.getItem("save");
+        if (save !== null) {
+            const parsed: Save = JSON.parse(save);
+            parsed.name = name;
+            localStorage.setItem("save", JSON.stringify(parsed));
+        }
+
         location.href = "/check";
     }
 
@@ -22,6 +30,14 @@ export default function Index(): JSX.Element {
     function handleChangeName(event: React.ChangeEvent<HTMLInputElement>): void {
         setName(event.target.value);
     }
+
+    useEffect(() => {
+        const save = localStorage.getItem("save");
+        if (save !== null) {
+            const parsed: Save = JSON.parse(save);
+            setName(parsed.name);
+        }
+    }, [setName]);
 
     return (
         <div
