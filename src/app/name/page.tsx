@@ -22,11 +22,19 @@ export default function Index(): JSX.Element {
                 </TextField.Root>
                 <Text color="tomato">※4文字以上10文字以下で入力してください。</Text>
             </div>
-            <div>
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: "1rem",
+                    padding: "1rem",
+                }}
+            >
                 <button aria-label="Return" type="button">
                     <img alt="" src="/return.png" />
                 </button>
-                <button aria-label="Return" type="button">
+                <button aria-label="Next" type="button">
                     <img alt="" src="/next.png" />
                 </button>
             </div>
