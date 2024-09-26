@@ -25,7 +25,30 @@ export default function Index(): JSX.Element {
         },
     });
 
+    let frankfurtTotal = 0;
+    Object.values(values.frankfurt).forEach((item) => {
+        frankfurtTotal += item;
+    });
+
+    let cheeseFrankfurtTotal = 0;
+    Object.values(values.cheeseFrankfurt).forEach((item) => {
+        cheeseFrankfurtTotal += item;
+    });
+
     function handleNext(): void {
+        let sumPrice = 0;
+        let normalNumber = 0;
+
+        if (frankfurtTotal < cheeseFrankfurtTotal) {
+            normalNumber = frankfurtTotal - cheeseFrankfurtTotal;
+            sumPrice = frankfurtTotal * 300 + normalNumber * 200;
+        } else if (frankfurtTotal === cheeseFrankfurtTotal) {
+            sumPrice = frankfurtTotal * 300;
+        } else {
+            normalNumber = cheeseFrankfurtTotal - frankfurtTotal;
+            sumPrice = cheeseFrankfurtTotal * 300 + normalNumber * 200;
+        }
+
         const save = localStorage.getItem("save");
         if (save !== null) {
             const parsed: Save = JSON.parse(save);
@@ -104,16 +127,6 @@ export default function Index(): JSX.Element {
             setValues(newValues);
         }
     };
-
-    let frankfurtTotal = 0;
-    Object.values(values.frankfurt).forEach((item) => {
-        frankfurtTotal += item;
-    });
-
-    let cheeseFrankfurtTotal = 0;
-    Object.values(values.cheeseFrankfurt).forEach((item) => {
-        cheeseFrankfurtTotal += item;
-    });
 
     return (
         <Flex align="center" direction="column" mt="2rem" width="100%">
