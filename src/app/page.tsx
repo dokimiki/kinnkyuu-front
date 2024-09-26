@@ -2,9 +2,10 @@
 
 import { Box, Container, Dialog, Flex, Text } from "@radix-ui/themes";
 import "./page.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Count from "@/src/components/count";
 import { type Order } from "@/src/types/order";
+import { type Save } from "@/src/types/save";
 
 export default function Index(): JSX.Element {
     const [values, setValues] = useState<Order>({
@@ -23,6 +24,34 @@ export default function Index(): JSX.Element {
             normalCount: 0,
         },
     });
+
+    function handleNext(): void {
+        const save = localStorage.getItem("save");
+        if (save !== null) {
+            const parsed: Save = JSON.parse(save);
+            parsed.order = values;
+            localStorage.setItem("save", JSON.stringify(parsed));
+        } else {
+            const parsed: Save = {
+                name: "",
+                order: values,
+                orderNumber: "",
+                total: -1,
+                isOrdered: false,
+            };
+            localStorage.setItem("save", JSON.stringify(parsed));
+        }
+
+        document.location.href = "/name";
+    }
+
+    useEffect(() => {
+        const save = localStorage.getItem("save");
+        if (save !== null) {
+            const parsed: Save = JSON.parse(save);
+            setValues(parsed.order);
+        }
+    }, [setValues]);
 
     const incrementCount = (sausage: string, taste: string): void => {
         const newValues = structuredClone(values);
@@ -224,7 +253,7 @@ export default function Index(): JSX.Element {
                 </Flex>
             </Container>
 
-            <button aria-label="Next" type="button">
+            <button aria-label="Next" onClick={handleNext} type="button">
                 <img alt="つぎへ" src="/next.png" />
             </button>
         </Box>

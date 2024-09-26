@@ -5,4 +5,5 @@ export type Save = {
     order: Order;
     orderNumber: string;
     total: number;
+    isOrdered: boolean;
 };
