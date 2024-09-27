@@ -23,7 +23,7 @@ export default function Index(): JSX.Element {
             localStorage.setItem("save", JSON.stringify(parsed));
         }
 
-        document.location.href = "/check";
+        document.location.href = "/check.html";
     }
 
     const [name, setName] = useState("");
@@ -37,7 +37,7 @@ export default function Index(): JSX.Element {
             const parsed: Save = JSON.parse(save);
 
             if (parsed.isOrdered) {
-                document.location.href = "/number";
+                document.location.href = "/number.html";
                 return;
             }
             

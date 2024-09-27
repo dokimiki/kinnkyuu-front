@@ -58,7 +58,7 @@ export default function Index(): JSX.Element {
             localStorage.setItem("save", JSON.stringify(parsed));
         }
 
-        document.location.href = "/name";
+        document.location.href = "/name.html";
     }
 
     useEffect(() => {
@@ -67,7 +67,7 @@ export default function Index(): JSX.Element {
             const parsed: Save = JSON.parse(save);
 
             if (parsed.isOrdered) {
-                document.location.href = "/number";
+                document.location.href = "/number.html";
                 return;
             }
 

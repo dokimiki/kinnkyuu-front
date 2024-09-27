@@ -2,9 +2,8 @@
     "private": true,
     "scripts": {
         "dev": "bun run next dev",
-        "build": "bun run api:build && bun run next build",
-        "start": "bun run next start",
-        "api:build": "bun run aspida build"
+        "build": "bun run next build",
+        "start": "bun run next start"
     },
     "dependencies": {
         "@aspida/axios": "^1.14.0",

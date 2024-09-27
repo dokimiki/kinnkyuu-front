@@ -17,7 +17,7 @@ export default function Index(): JSX.Element {
             const parsed: Save = JSON.parse(save);
 
             if (parsed.isOrdered) {
-                document.location.href = "/number";
+                document.location.href = "/number.html";
                 return;
             }
 
@@ -27,7 +27,7 @@ export default function Index(): JSX.Element {
         }
     }, [setOrder]);
 
-    function handleDecide() {
+    function handleDecide(): void {
         const randomId = Math.floor(Math.random() * 1000);
 
         const save = localStorage.getItem("save");
@@ -38,7 +38,7 @@ export default function Index(): JSX.Element {
             localStorage.setItem("save", JSON.stringify(parsed));
         }
 
-        //ここからグーグルフォーム送信用のコード
+        // ここからグーグルフォーム送信用のコード
         const formUrl = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfytJFibmQmGDOemB-Ixf_Lgt3tdZFiyuJcM_aSh0EG13neNA/formResponse";
 
         // フォームの入力データ
@@ -67,10 +67,10 @@ export default function Index(): JSX.Element {
         })
             .then((response) => {
                 console.log(response);
-                document.location.href = "/number";
+                document.location.href = "/number.html";
             })
             .catch((error) => {
-                alert("エラーが発生しました。もう一度お試しください。" + error);
+                alert(`エラーが発生しました。もう一度お試しください。${error}`);
             });
 
         // })
@@ -137,9 +137,15 @@ export default function Index(): JSX.Element {
                     padding: "1rem",
                 }}
             >
-                <Link href="/name">
+                <button
+                    aria-label="return"
+                    onClick={() => {
+                        document.location.href = "/name.html";
+                    }}
+                    type="button"
+                >
                     <img alt="もどる" src="/return.png" />
-                </Link>
+                </button>
                 <button aria-label="Next" id="decide" onClick={handleDecide} type="button">
                     <img alt="注文確定" src="/decide.png" />
                 </button>
