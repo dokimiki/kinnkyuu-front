@@ -1,7 +1,6 @@
 "use client";
 
 import { Text } from "@radix-ui/themes";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { type Order } from "@/src/types/order";
 import { type Save } from "@/src/types/save";
